@@ -13,9 +13,24 @@ export default function Home() {
             <IoIosSearch className="w-9 h-9 mt-5 " />
             <input className=" w-[450px] h-10 mt-5" placeholder="Search" />
           </div>
-          <Table />
+          <Table
+            celsius={26}
+            status={"Bright"}
+            city={"Ulaanbator"}
+            date={"September 10, Monday"}
+            image={"/sun.png"}
+          />
         </div>
-        <div className="bg-black w-[50%]"></div>
+        <div className="bg-black w-[50%]">
+          <Table
+            className="mt-60"
+            celsius={12}
+            status={"Clear"}
+            city={"Ulaanbator"}
+            date={"September 10, Monday"}
+            image={"/Moon.png"}
+          />
+        </div>
       </div>
     </>
   );
