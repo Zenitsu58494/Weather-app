@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { IoIosSearch } from "react-icons/io";
 import Table from "./Table";
-import { CiHome,CiLocationOn,CiHeart,CiUser } from "react-icons/ci";
+
 
 
 export default function Home() {

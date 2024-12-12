@@ -66,10 +66,10 @@ export default function Table(props) {
           <a className="text-[24px] ml-[50px] text-[#FF8E27]">{props.status}</a>
         </div>
        <div className="flex gap-[75px] ] ml-[50px] pt-10">
-        <CiHome  className=" text-gray-400 size-6"/>
-        <CiLocationOn  className=" text-gray-400 size-6"/>
-        <CiHeart  className= "text-gray-400 size-6"/>
-        <CiUser  className="text-gray-400 size-6"/>
+        <CiHome  className=" text-gray-400 hover:text-blue-400 size-6"/>
+        <CiLocationOn  className=" text-gray-400  hover:text-blue-400 size-6"/>
+        <CiHeart  className= "text-gray-400  hover:text-blue-400 size-6"/>
+        <CiUser  className="text-gray-400  hover:text-blue-400 size-6"/>
        </div>
       </div>
     </>
