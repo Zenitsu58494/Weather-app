@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <div className=" w=full h-screen flex">
-        <div className="bg-[#F3F4F6] w-[50%] ">
+        <div className="bg-[#F3F4F6] w-[50%] relative">
           <div className="bg-white w-[570px] rounded-[30px] h-20 ml-[200px] flex justify-center text-center gap-4">
             <IoIosSearch className="w-9 h-9 mt-5 " />
             <input
@@ -22,30 +22,29 @@ export default function Home() {
               className=" w-[450px] h-10 mt-5 outline-none"
               placeholder="Search"
             />
-            <button
-              onClick={() => {
-                Setchange(search);
-              }}
-              className="w-7 h-7 absolute z-30 bg-black"
-            ></button>
+            
           </div>
           <Table
-            style={"mt-40 bg-white"}
-            celsius={26}
-            status={change}
-            d
-            city={"Ulaanbator"}
-            date={"September 10, Monday"}
+            
           />
+           <div className="w-[128px] h-[128px] rounded-full bg-[#FF8E27] bg-[radial-gradient(circle , from-white from-0% to-white to-70%)] left-[350px] absolute top-[180px] " ></div>
         </div>
-        <div className=" w-[50%] bg-[#0F141E] relative bg-no-repeat bg-[length:100%]  ">
+        <div className=" w-[50%] bg-[#0F141E] relative bg-no-repeat bg-[length:100%] blur- ">
           <Table
-            style={"mt-60 bg-black"}
-            celsius={9}
-            status={change}
-            city={"Ulaanbator"}
-            date={"September 10, Monday"}
+          Value={"Night"}
+           
           />
+          <div className="w-[128px] h-[128px] rounded-full bg-[#6E72C9] bg-[radial-gradient(circle , from-white from-0% to-white to-70%)] right-[420px] absolute bottom-[100px]" ></div>
+          <div className="bg-[#f3f4f6] rounded-[5px] w-6 h-6 absolute mt-[582px]"></div>
+          <div className="bg-[#0F141E] rounded-[10px] w-6 h-6 absolute mt-[582px] "></div>
+          <div className="w-[140px] h-[140px] bg-[#F3F4F6] rounded-full mt-[600px] absolute -ml-[70px]">\
+            <div className="flex ml-[18px] gap-4">
+            <Image src={"/Vector3.png"} width={44} height={86}/>
+            <Image src={"/Vector2.png"} width={44} height={86}/>
+            
+            </div>
+            </div>
+
           <Corners />
         </div>
       </div>
