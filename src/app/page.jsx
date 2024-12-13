@@ -5,9 +5,35 @@ import { IoIosSearch } from "react-icons/io";
 import Table from "./Table";
 import { Corners } from "./components/Corners";
 
+const API_KEY = "1031cbc6f72a4a88b6a72453241312 ";
+
 export default function Home() {
-  const [change, Setchange] = useState("Bright");
   const [search, Setsearch] = useState("");
+  const [city, Setcity] = useState("Ulaanbaatar");
+  const [dayweather, SetDayWeather] = useState({});
+
+  const onPressEnter = (e) => {
+    if (e.code === "Enter") {
+      Setcity(search);
+    }
+  };
+  useEffect(() => {
+    fetch(
+      `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=1&aqi=no&alerts=no`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        SetDayWeather({
+          temperature: data.forecast.forecastday[0].day.maxtemp_c,
+          nightTemperature: data.forecast.forecastday[0].day.mintemp_c,
+          status: data.forecast.forecastday[0].day.condition.text,
+          nightstatus: data.forecast.forecastday[0].day.condition.text,
+          date: data.forecast.forecastday[0].date,
+        });
+      });
+  }, [city]);
+
   return (
     <>
       <div className=" w=full h-screen flex">
@@ -17,33 +43,37 @@ export default function Home() {
             <input
               onChange={(e) => {
                 Setsearch(e.target.value);
-                console.log(search);
               }}
               className=" w-[450px] h-10 mt-5 outline-none"
               placeholder="Search"
+              onKeyDown={onPressEnter}
             />
-            
           </div>
           <Table
-            
+            city={city}
+            celsius={dayweather.temperature}
+            status={dayweather.status}
+            date={dayweather.date}
           />
-           <div className="w-[128px] h-[128px] rounded-full bg-[#FF8E27] bg-[radial-gradient(circle , from-white from-0% to-white to-70%)] left-[350px] absolute top-[180px] " ></div>
+          <div className="w-[128px] h-[128px] rounded-full bg-[#FF8E27] bg-[radial-gradient(circle , from-white from-0% to-white to-70%)] left-[350px] absolute top-[180px] "></div>
         </div>
         <div className=" w-[50%] bg-[#0F141E] relative bg-no-repeat bg-[length:100%] blur- ">
           <Table
-          Value={"Night"}
-           
+            Value={"Night"}
+            city={city}
+            celsius={dayweather.nightTemperature}
+            status={dayweather.status}
+            date={dayweather.date}
           />
-          <div className="w-[128px] h-[128px] rounded-full bg-[#6E72C9] bg-[radial-gradient(circle , from-white from-0% to-white to-70%)] right-[420px] absolute bottom-[100px]" ></div>
+          <div className="w-[128px] h-[128px] rounded-full bg-[#6E72C9] bg-[radial-gradient(circle , from-white from-0% to-white to-70%)] right-[260px] absolute bottom-[5px]"></div>
           <div className="bg-yellow-200 rounded-full w-8 h-8 absolute mt-[570px]  shadow-[-0px_-0px_3px_3px_rgba(255,255,255)]"></div>
-          
-          <div className="w-[140px] h-[140px] bg-[#F3F4F6] rounded-full mt-[600px] absolute -ml-[70px]">\
-            <div className="flex ml-[18px] gap-4">
-            <Image src={"/Vector3.png"} width={44} height={86}/>
-            <Image src={"/Vector2.png"} width={44} height={86}/>
-            
+
+          <div className="w-[140px] h-[140px] bg-[#F3F4F6] rounded-full mt-[550px] absolute -ml-[70px]">
+            <div className="flex ml-[18px] mt-5 gap-4">
+              <Image src={"/Vector3.png"} width={44} height={86} alt="" />
+              <Image src={"/Vector2.png"} width={44} height={86} alt="" />
             </div>
-            </div>
+          </div>
 
           <Corners />
         </div>
