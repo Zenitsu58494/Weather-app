@@ -35,8 +35,8 @@ export default function Home() {
            
           />
           <div className="w-[128px] h-[128px] rounded-full bg-[#6E72C9] bg-[radial-gradient(circle , from-white from-0% to-white to-70%)] right-[420px] absolute bottom-[100px]" ></div>
-          <div className="bg-[#f3f4f6] rounded-[5px] w-6 h-6 absolute mt-[582px]"></div>
-          <div className="bg-[#0F141E] rounded-[10px] w-6 h-6 absolute mt-[582px] "></div>
+          <div className="bg-yellow-200 rounded-full w-8 h-8 absolute mt-[570px]  shadow-[-0px_-0px_3px_3px_rgba(255,255,255)]"></div>
+          
           <div className="w-[140px] h-[140px] bg-[#F3F4F6] rounded-full mt-[600px] absolute -ml-[70px]">\
             <div className="flex ml-[18px] gap-4">
             <Image src={"/Vector3.png"} width={44} height={86}/>
