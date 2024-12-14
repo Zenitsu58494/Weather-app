@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { IoIosSearch } from "react-icons/io";
-import Table from "./Table";
+import Card from "./Card";
 import { Corners } from "./components/Corners";
 
 const API_KEY = "1031cbc6f72a4a88b6a72453241312 ";
@@ -29,10 +29,16 @@ export default function Home() {
           nightTemperature: data.forecast.forecastday[0].day.mintemp_c,
           status: data.forecast.forecastday[0].day.condition.text,
           nightstatus: data.forecast.forecastday[0].day.condition.text,
-          date: data.forecast.forecastday[0].date,
         });
       });
   }, [city]);
+  useEffect(() => {
+    fetch(`https://countriesnow.space/api/v0.1/countries`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+  });
 
   return (
     <>
@@ -49,7 +55,7 @@ export default function Home() {
               onKeyDown={onPressEnter}
             />
           </div>
-          <Table
+          <Card
             city={city}
             celsius={dayweather.temperature}
             status={dayweather.status}
@@ -58,7 +64,7 @@ export default function Home() {
           <div className="w-[128px] h-[128px] rounded-full bg-[#FF8E27] bg-[radial-gradient(circle , from-white from-0% to-white to-70%)] left-[350px] absolute top-[180px] "></div>
         </div>
         <div className=" w-[50%] bg-[#0F141E] relative bg-no-repeat bg-[length:100%] blur- ">
-          <Table
+          <Card
             Value={"Night"}
             city={city}
             celsius={dayweather.nightTemperature}

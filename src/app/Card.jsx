@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CiHome } from "react-icons/ci";
 import { CiLocationOn, CiHeart, CiUser } from "react-icons/ci";
-export default function Table(props) {
+export default function Card(props) {
   let style,
     date,
     city,
@@ -9,6 +9,7 @@ export default function Table(props) {
     celsius,
     celsiusStyle,
     dot,
+    status,
     smalldot,
     iconcolor = null;
 
@@ -17,6 +18,8 @@ export default function Table(props) {
     date = props.date;
     city = props.city;
     color = "text-[#777CCE]";
+    status = props.status;
+    iconcolor = "text-white hover:text-blue-400";
 
     celsius = props.celsius;
     celsiusStyle =
@@ -27,6 +30,7 @@ export default function Table(props) {
   } else {
     style = "mt-40 bg-white";
     celsius = props.celsius;
+    status = props.status;
 
     color = "text-[#FF8E27]";
     city = props.city;
@@ -36,32 +40,39 @@ export default function Table(props) {
     dot =
       "w-[50px] h-[50px]  rounded-full  bg-gradient-to-b from-[#111827] to-[#6B7280]  mt-[50px] ml-[20px]  flex justify-center items-center";
     smalldot = "bg-[#F3F4F6] w-5 h-5 rounded-full";
-    iconcolor = "text-black";
+    iconcolor = "text-black hover:text-blue-400";
   }
   let weatherImage = "/sun.png";
-  if (props.status === "Sunny" && props.Value === "Night") {
+  if (status === "Sunny" && props.Value === "Night") {
     weatherImage = "/Moon.png";
-  } else if (props.status === "Overcast " && props.Value === "Night") {
-    weatherImage = "/NightClouds.png";
-  } else if (props.status === "Rainy" && props.Value === "Night") {
-    weatherImage = "/NightRain.png";
   } else if (
-    props.status === "Light freezing rain" &&
+    (status === "Light snow" || status === "Moderate snow") &&
     props.Value === "Night"
   ) {
+    weatherImage = "/NightSnow.png";
+  } else if (status === "Overcast " && props.Value === "Night") {
+    weatherImage = "/NightClouds.png";
+  } else if (status === "Moderate rain" && props.Value === "Night") {
+    weatherImage = "/NightRain.png";
+  } else if (status === "Light freezing rain" && props.Value === "Night") {
     weatherImage = "/NightStorm.png";
-  } else if (props.status === "Windy" && props.Value === "Night") {
+  } else if (status === "Windy" && props.Value === "Night") {
     weatherImage = "/NightWind.png";
-  } else if (props.status === "Sunny" && props.Value === "Night") {
+  } else if (status === "Sunny" && props.Value === "Night") {
     weatherImage = "/Moon.png";
-  } else if (props.status === "Overcast ") {
+  } else if (status === "Moderate rain") {
+    weatherImage = "/DayRain.png";
+  } else if (status === "Overcast ") {
     weatherImage = "/Clouds.png";
-  } else if (props.status === "Snowy") {
+  } else if (status === "Light snow" || status === "Moderate snow") {
     weatherImage = "/DaySnow.png";
-  } else if (props.status === "Light freezing rain") {
+  } else if (status === "Light freezing rain") {
     weatherImage = "/DayStorm.png";
-  } else if (props.status === "Windy") {
+  } else if (status === "Windy") {
     weatherImage = "/DayWind.png";
+  }
+  if (props.Value === "Night" && status === "Sunny") {
+    status = "Clear";
   }
 
   return (
@@ -78,7 +89,7 @@ export default function Table(props) {
           <CiLocationOn className={`${iconcolor} size-6`} />
         </div>
 
-        <Image
+        <img
           className="ml-20 mt-[130px]"
           src={weatherImage}
           width={260}
@@ -92,7 +103,7 @@ export default function Table(props) {
               <div className={`${smalldot}`}></div>
             </div>
           </div>
-          <a className={`text-[24px] ml-[50px] ${color} `}>{props.status}</a>
+          <a className={`text-[24px] ml-[50px] ${color} `}>{status}</a>
         </div>
         <div className="flex gap-[75px] ] ml-[50px] pt-10">
           <CiHome className=" text-gray-400 hover:text-blue-400 size-6" />
