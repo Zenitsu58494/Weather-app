@@ -42,7 +42,7 @@ export default function Card(props) {
     iconcolor = "text-black hover:text-blue-400";
   }
   let weatherImage = "/sun.png";
-  if (status === "Sunny" && props.Value === "Night") {
+  if (status === "Clear " && props.Value === "Night") {
     weatherImage = "/Moon.png";
   } else if (
     (status === "Light snow" || status === "Moderate snow") &&
@@ -51,7 +51,10 @@ export default function Card(props) {
     weatherImage = "/NightSnow.png";
   } else if (status === "Overcast " && props.Value === "Night") {
     weatherImage = "/NightClouds.png";
-  } else if (status === "Moderate rain" && props.Value === "Night") {
+  } else if (
+    (status === "Moderate rain" || status === "Patchy rain nearby") &&
+    props.Value === "Night"
+  ) {
     weatherImage = "/NightRain.png";
   } else if (status === "Light freezing rain" && props.Value === "Night") {
     weatherImage = "/NightStorm.png";
@@ -59,9 +62,9 @@ export default function Card(props) {
     weatherImage = "/NightWind.png";
   } else if (status === "Sunny" && props.Value === "Night") {
     weatherImage = "/Moon.png";
-  } else if (status === "Moderate rain") {
+  } else if (status === "Moderate rain" || status === "Patchy rain nearby") {
     weatherImage = "/DayRain.png";
-  } else if (status === "Overcast ") {
+  } else if (status === "Overcast " || status === "Cloudy ") {
     weatherImage = "/Clouds.png";
   } else if (status === "Light snow" || status === "Moderate snow") {
     weatherImage = "/DaySnow.png";
@@ -70,14 +73,11 @@ export default function Card(props) {
   } else if (status === "Windy") {
     weatherImage = "/DayWind.png";
   }
-  if (props.Value === "Night" && status === "Sunny") {
-    status = "Clear";
-  }
 
   return (
     <>
       <div
-        className={`absolute z-10 w-[400px]  ml-[400px] h-[900px] rounded-3xl ${style}`}
+        className={`absolute z-10 w-[400px]  ml-[400px] h-[800px] rounded-3xl ${style}`}
       >
         <div className="ml-10 pt-[50px]">
           <h1 className="text-yellow-400">{props.date}</h1>
