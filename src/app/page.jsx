@@ -17,7 +17,7 @@ export default function Home() {
       Setcity(search);
     }
   };
-  useEffect(() => {
+  useEffect(async () => {
     fetch(
       `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=1&aqi=no&alerts=no`
     )
