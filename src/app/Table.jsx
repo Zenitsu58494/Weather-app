@@ -21,7 +21,6 @@ export default function Card(props) {
     status = props.status;
     iconcolor = "text-white hover:text-blue-400";
 
-    celsius = props.celsius;
     celsiusStyle =
       "text-[120px] ml-[50px] text-line text-transparent bg-clip-text bg-gradient-to-b from-[#F9FAFB] to-[#252626] flex font-bold";
     dot =
@@ -29,7 +28,7 @@ export default function Card(props) {
     smalldot = "w-5 h-5 rounded-full  bg-[#111827] ";
   } else {
     style = "mt-40 bg-white";
-    celsius = props.celsius;
+
     status = props.status;
 
     color = "text-[#FF8E27]";
@@ -98,7 +97,7 @@ export default function Card(props) {
         />
         <div>
           <div className={`${celsiusStyle}`}>
-            {celsius}
+            {props.celsius}
             <div className={`${dot}`}>
               <div className={`${smalldot}`}></div>
             </div>
