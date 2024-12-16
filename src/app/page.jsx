@@ -8,13 +8,41 @@ import { Corners } from "./components/Corners";
 const API_KEY = "1031cbc6f72a4a88b6a72453241312 ";
 
 export default function Home() {
-  const [search, Setsearch] = useState("");
-  const [city, Setcity] = useState("Ulaanbaatar");
+  const [search, setSearch] = useState("");
+  const [city, setCity] = useState("Ulaanbaatar");
   const [dayweather, SetDayWeather] = useState({});
+  const [suggestions, setSuggestions] = useState([]);
+
+  const CitySuggestions = async (text) => {
+    const response = await fetch(
+      "https://countriesnow.space/api/v0.1/countries"
+    );
+    const data = await response.json();
+
+    if (data && data.data) {
+      const allCities = data.data.flatMap((country) => country.cities);
+      const filteredCities = allCities.filter((cityName) =>
+        cityName.startsWith(text)
+      );
+      setSuggestions(filteredCities.slice(0, 5));
+    }
+  };
+
+  const onChange = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    CitySuggestions(value);
+  };
+
+  const onCitySelect = (selectedCity) => {
+    setCity(selectedCity);
+    setSearch(selectedCity);
+    setSuggestions([]);
+  };
 
   const onPressEnter = (e) => {
     if (e.code === "Enter") {
-      Setcity(search);
+      setCity(search);
     }
   };
   useEffect(() => {
@@ -40,13 +68,24 @@ export default function Home() {
           <div className="bg-white w-[570px] rounded-[30px] h-20 ml-[200px] flex justify-center text-center gap-4">
             <IoIosSearch className="w-9 h-9 mt-5 " />
             <input
-              onChange={(e) => {
-                Setsearch(e.target.value);
-              }}
+              onChange={onChange}
               className=" w-[450px] h-10 mt-5 outline-none"
               placeholder="Search"
               onKeyDown={onPressEnter}
             />
+            {
+              <ul className="absolute top-[60px] bg-white w-[450px] shadow-md rounded-lg z-20 text-black">
+                {suggestions.map((suggestion, index) => (
+                  <li
+                    key={index}
+                    onClick={() => onCitySelect(suggestion)}
+                    className="p-2 hover:bg-gray-100 cursor-pointer"
+                  >
+                    {suggestion}
+                  </li>
+                ))}
+              </ul>
+            }
           </div>
           <Card
             city={city}
